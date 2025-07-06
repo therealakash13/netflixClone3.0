@@ -1,9 +1,36 @@
-import { GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, type CredentialResponse } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import type { decodedResponse } from "./LoginTypes";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-  const responseMessage = (response: any) => {
-    console.log("Login Successfull", response);
-    // Decode the response using jwt-decode
+
+  const navigate = useNavigate();
+
+  const responseMessage = (response: CredentialResponse) => {
+    if (response.credential) {
+      try {
+        // Decode the response using jwt-decode
+        const decoded = jwtDecode<decodedResponse>(response.credential!);
+        console.log(decoded);
+
+        // Save to sessionStorage
+        const user: Partial<decodedResponse> = {
+          name: decoded.name,
+          email: decoded.email,
+          picture: decoded.picture,
+          sub: decoded.sub,
+          exp: decoded.exp,
+        };
+
+        sessionStorage.setItem("user", JSON.stringify(user));
+        navigate('/home');
+      } catch (error) {
+        console.error("Failed to decode credential:", error);
+      }
+    } else {
+      console.warn("No credential found in response.");
+    }
   };
   const errorMessage = () => {
     console.log("Login Failed");
