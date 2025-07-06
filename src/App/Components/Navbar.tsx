@@ -160,7 +160,7 @@ export default function Navbar() {
         </div>
       </nav> */}
 
-      <nav className="bg-[#36454F] text-white font-semibold rounded-b-lg">
+      <nav className="text-white font-semibold rounded-b-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
@@ -224,7 +224,7 @@ export default function Navbar() {
               )}
 
               {user.name && (
-                <span className="font-bold text-lg text-white">
+                <span className="font-bold text-lg text-white cursor-default">
                   {user.name}
                 </span>
               )}
@@ -239,7 +239,7 @@ export default function Navbar() {
 
               <button
                 onClick={signOut}
-                className="ml-2 text-red-400 hover:text-red-600"
+                className="ml-2 text-red-500 hover:text-red-300 cursor-pointer"
               >
                 Sign Out
               </button>
