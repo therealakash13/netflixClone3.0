@@ -4,7 +4,6 @@ import type { decodedResponse } from "./LoginTypes";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-
   const navigate = useNavigate();
 
   const responseMessage = (response: CredentialResponse) => {
@@ -12,7 +11,6 @@ export default function LoginPage() {
       try {
         // Decode the response using jwt-decode
         const decoded = jwtDecode<decodedResponse>(response.credential!);
-        console.log(decoded);
 
         // Save to sessionStorage
         const user: Partial<decodedResponse> = {
@@ -24,7 +22,7 @@ export default function LoginPage() {
         };
 
         sessionStorage.setItem("user", JSON.stringify(user));
-        navigate('/home');
+        navigate("/home");
       } catch (error) {
         console.error("Failed to decode credential:", error);
       }
