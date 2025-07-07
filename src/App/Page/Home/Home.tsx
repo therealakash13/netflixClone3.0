@@ -17,5 +17,5 @@ export default function HomePage() {
     console.log(movie);
   }, [movie]);
 
-  return <>{movie.length > 1 && <Banner receivedData={movie[1]} />}</>;
+  return <>{movie.length > 1 && <Banner receivedData={movie[0]} />}</>;
 }

@@ -26,8 +26,6 @@ export default function Navbar() {
   const [user, setUser] = useState<Partial<decodedResponse>>({});
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const [isScrolled, setIsScrolled] = useState(false);
-
   const onSearchChange = () => {
     // Simulate search logic
     if (searchTerm.length > 1) {
@@ -64,24 +62,13 @@ export default function Navbar() {
         console.error("Failed to parse session user data", err);
       }
     }
-
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10); // adjust threshold as needed
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-colors duration-500 ${
-          isScrolled ? "bg-black bg-opacity-70 backdrop-blur" : "bg-transparent"
-        } font-semibold`}
-      >
+      <nav className="fixed top-0 left-0 w-full z-50 bg-opacity-70 backdrop-blur font-semibold transition-colors duration-500 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex text-lg justify-between items-center pt-3">
+          <div className="flex text-lg justify-between items-center pt-3 pb-3">
             {/* Logo */}
             <Link to="/home">
               <img
@@ -131,16 +118,16 @@ export default function Navbar() {
                 className="px-3 py-1 rounded-xl border shadow-sm focus:outline-none focus:ring w-60 hidden xl:flex"
               />
               {isDropdownVisible && (
-                <ul className="absolute top-full mt-1 bg-gray-700 w-80 rounded-xl z-10 max-h-96 overflow-y-auto">
+                <ul className="absolute top-full mt-1 w-80 rounded-xl z-10 max-h-96 overflow-y-auto bg-amber-50 bg-opacity-10 backdrop-blur-md text-black transition-colors duration-500">
                   {searchResults.map((item, i) => (
                     <li
                       key={i}
-                      className="p-2 hover:bg-gray-100 cursor-pointer"
+                      className="p-2 hover:bg-gray-200 hover:text-black cursor-pointer"
                       onClick={() => selectResult(item)}
                     >
                       <div className="flex items-center space-x-2">
                         <img
-                          className="w-10"
+                          className="w-10 rounded"
                           src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                           alt=""
                         />
