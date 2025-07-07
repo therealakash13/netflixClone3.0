@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchPopularMovies } from "../../Services/MovieFetch";
 import type { Movie } from "../../Services/movies.type";
+import Banner from "./Banner";
 
 export default function HomePage() {
   const [movie, setMovie] = useState<Movie[]>([]);
@@ -16,9 +17,5 @@ export default function HomePage() {
     console.log(movie);
   }, [movie]);
 
-  return (
-    <>
-      <h1>Home</h1>
-    </>
-  );
+  return <>{movie.length > 1 && <Banner receivedData={movie[1]} />}</>;
 }

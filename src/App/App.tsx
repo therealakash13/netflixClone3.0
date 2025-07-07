@@ -3,6 +3,7 @@ import "./App.css";
 import LoginPage from "./Page/Login/LoginPage";
 import HomePage from "./Page/Home/Home";
 import Layout from "./Layouts/Layout";
+import "boxicons";
 
 function App() {
   return (

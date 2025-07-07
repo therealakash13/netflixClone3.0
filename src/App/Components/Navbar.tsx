@@ -26,6 +26,8 @@ export default function Navbar() {
   const [user, setUser] = useState<Partial<decodedResponse>>({});
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const onSearchChange = () => {
     // Simulate search logic
     if (searchTerm.length > 1) {
@@ -62,107 +64,24 @@ export default function Navbar() {
         console.error("Failed to parse session user data", err);
       }
     }
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10); // adjust threshold as needed
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <>
-      {/* <nav className="font-semibold bg-[#36454F] rounded-b-lg text-white">
-        <div className="flex flex-row">
-          <div className="flex justify-center">
-            <img
-              width="110"
-              className="mt-3 mb-3 mr-3 m-5 cursor-pointer"
-              src="/logo.png"
-              alt="Niggaflix"
-              onClick={() => navigate("/")}
-            />
-          </div>
-          <div className="flex flex-row justify-between items-center ml-1 mr-1 w-full">
-            <div className="sm:ml-2 lg:ml-5">
-              <ul className="ml-3 flex flex-row sm:space-x-4 lg:space-x-12">
-                {[
-                  { name: "Movies", path: "/movies" },
-                  { name: "Tv Shows", path: "/tvshows" },
-                  { name: "Now Playing", path: "/nowplaying" },
-                  { name: "Popular", path: "/popular" },
-                  { name: "Upcoming Movies", path: "/upcoming" },
-                  { name: "About", path: "/about" },
-                ].map((link) => (
-                  <li
-                    key={link.name}
-                    className="cursor-pointer hover:scale-110 hover:text-black"
-                  >
-                    <Link
-                      to={link.path}
-                      className="hover:font-bold hover:text-black"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex items-center">
-              <div className="relative flex justify-center p-4 text-black">
-                <input
-                  type="text"
-                  value={searchTerm}
-                  placeholder="Search..."
-                  className="w-full max-w-lg px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-                  onChange={(e) => {
-                    setSearchTerm(e.target.value);
-                    onSearchChange();
-                  }}
-                  onFocus={onSearchChange}
-                />
-                {isDropdownVisible && (
-                  <ul className="absolute top-full mt-1 w-full max-w-lg bg-gray-700 border rounded-xl z-10 max-h-96 overflow-y-auto">
-                    {searchResults.map((item, index) => (
-                      <li
-                        key={index}
-                        className="p-2 hover:bg-gray-100 cursor-pointer"
-                        onClick={() => selectResult(item)}
-                      >
-                        <div className="flex flex-row items-center space-x-2">
-                          <img
-                            className="w-14"
-                            src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                            alt=""
-                          />
-                          <span>{item.name || item.title}</span>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-
-              <span className="inline-block px-4 py-2 text-lg font-bold">
-                {user.name}
-              </span>
-
-              <img
-                width="42"
-                className="rounded-full mt-1 mb-1"
-                src={user.picture}
-                alt="User avatar"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-            &nbsp; |
-            <button
-              onClick={signOut}
-              className="lg:px-4 sm:px-2 hover:text-[#E50914]"
-            >
-              Sign Out
-            </button>
-          </div>
-        </div>
-      </nav> */}
-
-      <nav className="text-white font-semibold rounded-b-lg">
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 transition-colors duration-500 ${
+          isScrolled ? "bg-black bg-opacity-70 backdrop-blur" : "bg-transparent"
+        } font-semibold`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
+          <div className="flex text-lg justify-between items-center pt-3">
             {/* Logo */}
             <Link to="/home">
               <img
@@ -174,7 +93,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-8">
               <ul className="flex space-x-6">
                 {links.map((link) => (
                   <li key={link.name}>
@@ -190,7 +109,13 @@ export default function Navbar() {
             </div>
 
             {/* Search + Profile */}
-            <div className="hidden md:flex items-center space-x-4 text-white relative">
+
+            <div className="hidden md:flex items-center space-x-3 relative">
+              {/* Search Icon */}
+              <div className="xl:hidden ">
+                <i className="bx bx-search-alt-2 text-3xl"></i>
+              </div>
+
               <input
                 type="text"
                 value={searchTerm}
@@ -200,10 +125,10 @@ export default function Navbar() {
                 }}
                 onFocus={onSearchChange}
                 placeholder="Search..."
-                className="px-3 py-1 rounded-xl border shadow-sm focus:outline-none focus:ring w-60"
+                className="px-3 py-1 rounded-xl border shadow-sm focus:outline-none focus:ring w-60 hidden xl:flex"
               />
               {isDropdownVisible && (
-                <ul className="absolute top-full mt-1 bg-gray-700 text-white w-80 rounded-xl z-10 max-h-96 overflow-y-auto">
+                <ul className="absolute top-full mt-1 bg-gray-700 w-80 rounded-xl z-10 max-h-96 overflow-y-auto">
                   {searchResults.map((item, i) => (
                     <li
                       key={i}
@@ -224,7 +149,7 @@ export default function Navbar() {
               )}
 
               {user.name && (
-                <span className="font-bold text-lg text-white cursor-default">
+                <span className="font-bold text-lg cursor-default">
                   {user.name}
                 </span>
               )}
@@ -249,7 +174,7 @@ export default function Navbar() {
             <div className="md:hidden">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-white focus:outline-none"
+                className="focus:outline-none"
               >
                 ☰
               </button>
@@ -258,28 +183,30 @@ export default function Navbar() {
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div className="md:hidden flex flex-col items-start space-y-2 pb-4">
+            <div className="md:hidden flex flex-col items-end space-y-2 pb-4">
               {links.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="block text-white hover:text-black hover:font-bold"
+                  className="block text-2xl hover:text-red-500 hover:font-bold"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="flex items-center space-x-2 mt-4">
-                <img
-                  src={user.picture}
-                  alt="User"
-                  className="w-10 h-10 rounded-full"
-                  referrerPolicy="no-referrer"
-                />
-                <span className="text-white font-bold">{user.name}</span>
+              <div className="flex flex-col items-end space-y-2">
+                <div className="flex items-center justify-center space-x-2">
+                  <img
+                    src={user.picture}
+                    alt="User"
+                    className="w-10 h-10 rounded-full"
+                    referrerPolicy="no-referrer"
+                  />
+                  <span className="font-bold text-xl">{user.name}</span>
+                </div>
                 <button
                   onClick={signOut}
-                  className="text-red-400 hover:text-red-600"
+                  className="text-white bg-red-500 rounded-xl px-2 mt-1"
                 >
                   Sign Out
                 </button>
