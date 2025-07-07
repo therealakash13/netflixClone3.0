@@ -12,12 +12,12 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const links = [
-    { name: "Movies", path: "/movies" },
-    { name: "Tv Shows", path: "/tvshows" },
-    { name: "Now Playing", path: "/nowplaying" },
-    { name: "Popular", path: "/popular" },
-    { name: "Upcoming", path: "/upcoming" },
-    { name: "About", path: "/about" },
+    { name: "Movies", path: "/movies", icon: "bx bxs-camera-movie" },
+    { name: "Tv Shows", path: "/tvshows", icon: "bx bxs-tv" },
+    { name: "Now Playing", path: "/nowplaying", icon: "bx bxs-movie-play" },
+    { name: "Popular", path: "/popular", icon: "bx bx-trending-up" },
+    { name: "Upcoming", path: "/upcoming", icon: "bx bxs-archive-in" },
+    { name: "About", path: "/about", icon: "bx bxs-info-circle" },
   ];
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -94,14 +94,17 @@ export default function Navbar() {
 
             {/* Desktop Nav */}
             <div className="hidden lg:flex items-center space-x-8">
-              <ul className="flex space-x-6">
+              <ul className="flex items-center justify-center space-x-6">
                 {links.map((link) => (
                   <li key={link.name}>
                     <Link
                       to={link.path}
                       className="hover:scale-110 hover:text-[#db1a27] transition"
                     >
-                      {link.name}
+                      <div className="flex flex-col items-center justify-center ">
+                        <i className={link.icon}></i>
+                        {link.name}
+                      </div>
                     </Link>
                   </li>
                 ))}
@@ -188,9 +191,10 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="block text-2xl hover:text-red-500 hover:font-bold"
+                  className="flex items-center justify-center text-2xl hover:text-red-500 hover:font-bold"
                   onClick={() => setMobileMenuOpen(false)}
                 >
+                  <i className={`${link.icon} mr-3`}></i>
                   {link.name}
                 </Link>
               ))}
