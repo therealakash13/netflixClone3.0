@@ -29,8 +29,15 @@ const Banner: React.FC<BannerProps> = ({ receivedData }) => {
         <p className="text-base sm:text-lg lg:text-xl mb-6 max-w-3xl">
           {receivedData?.overview?.slice(0, 250)}...
         </p>
-        <button className="bg-white text-black py-2 px-6 sm:py-3 sm:px-8 lg:py-4 lg:px-12 text-sm sm:text-lg lg:text-xl rounded-lg hover:bg-opacity-70 transition duration-500">
-          ► Play / More Info
+        <button
+          className="bg-white text-black py-2 px-6 text-sm rounded-lg hover:bg-opacity-70 hover:scale-110 transition duration-500 cursor-pointer
+                  sm:py-3 sm:px-8 sm:text-base sm:max-w-sm
+                  md:py-3 md:px-10 md:max-w-md
+                  lg:py-4 lg:px-12 lg:text-lg lg:max-w-lg"
+        >
+          <div className="flex items-center justify-center">
+            <i className="bx bx-play lg:text-5xl md:text-3xl sm:text-xl"></i> Play / More Info
+          </div>
         </button>
       </div>
     </div>
