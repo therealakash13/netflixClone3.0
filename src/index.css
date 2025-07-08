@@ -13,3 +13,11 @@
     font-family: "Poppins", sans-serif;
   }
 }
+
+@theme {
+  --color-primary: #1c1c1e;
+  --color-secondary: #2c2c2e;
+  --color-accent: 	#F47521;
+  --color-text-muted: #b0b0b0;
+  --color-border-default: #3a3a3c;
+}

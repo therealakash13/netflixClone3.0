@@ -13,7 +13,7 @@ export default function Navbar() {
 
   const links = [
     { name: "Movies", path: "/movies", icon: "bx bxs-camera-movie" },
-    { name: "Tv Shows", path: "/tvshows", icon: "bx bxs-tv" },
+    { name: "TV Shows", path: "/tvshows", icon: "bx bxs-tv" },
     { name: "Now Playing", path: "/nowplaying", icon: "bx bxs-movie-play" },
     { name: "Popular", path: "/popular", icon: "bx bx-trending-up" },
     { name: "Upcoming", path: "/upcoming", icon: "bx bxs-archive-in" },
@@ -66,7 +66,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-opacity-70 backdrop-blur font-semibold transition-colors duration-500 text-white">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-opacity-70 backdrop-blur font-semibold transition-colors duration-500 text-white ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex text-lg justify-between items-center pt-3 pb-3">
             {/* Logo */}
@@ -86,9 +86,9 @@ export default function Navbar() {
                   <li key={link.name}>
                     <Link
                       to={link.path}
-                      className="hover:scale-110 hover:text-[#db1a27] transition"
+                      className=""
                     >
-                      <div className="flex flex-col items-center justify-center ">
+                      <div className="flex flex-col items-center justify-center hover:scale-110 hover:text-accent transition duration-500">
                         <i className={link.icon}></i>
                         {link.name}
                       </div>
@@ -103,7 +103,7 @@ export default function Navbar() {
             <div className="hidden md:flex items-center space-x-3 relative">
               {/* Search Icon */}
               <div className="xl:hidden ">
-                <i className="bx bx-search-alt-2 text-3xl"></i>
+                <i className="bx bx-search-alt-2 text-3xl hover:scale-110 hover:text-accent transition duration-500 cursor-pointer"></i>
               </div>
 
               <input
@@ -115,10 +115,10 @@ export default function Navbar() {
                 }}
                 onFocus={onSearchChange}
                 placeholder="Search..."
-                className="px-3 py-1 rounded-xl border shadow-sm focus:outline-none focus:ring w-60 hidden xl:flex"
+                className="px-3 py-1 rounded-xl border-2 focus:border-accent shadow-sm focus:outline-none w-60 hidden xl:flex"
               />
               {isDropdownVisible && (
-                <ul className="absolute top-full mt-1 w-80 rounded-xl z-10 max-h-96 overflow-y-auto bg-amber-50 bg-opacity-10 backdrop-blur-md text-black transition-colors duration-500">
+                <ul className="absolute top-full mt-1 w-80 rounded-xl z-10 max-h-96 overflow-y-auto bg-accent text-white transition-colors duration-500">
                   {searchResults.map((item, i) => (
                     <li
                       key={i}
@@ -154,7 +154,7 @@ export default function Navbar() {
 
               <button
                 onClick={signOut}
-                className="ml-2 text-red-500 hover:text-red-300 cursor-pointer"
+                className="ml-2 text-red-500 hover:text-accent hover:scale-110 cursor-pointer outline-2 outline-accent transition duration-500 px-3 rounded-xl"
               >
                 Sign Out
               </button>
@@ -166,7 +166,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="focus:outline-none"
               >
-                ☰
+                <i className='bx bx-menu text-2xl hover:text-accent hover:scale-110 transition duration-500 cursor-pointer'></i>
               </button>
             </div>
           </div>
@@ -178,7 +178,7 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="flex items-center justify-center text-2xl hover:text-red-500 hover:font-bold"
+                  className="flex items-center justify-center text-2xl hover:text-accent hover:font-bold transition duration-500 hover:scale-110"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <i className={`${link.icon} mr-3`}></i>
@@ -193,11 +193,11 @@ export default function Navbar() {
                     className="w-10 h-10 rounded-full"
                     referrerPolicy="no-referrer"
                   />
-                  <span className="font-bold text-xl">{user.name}</span>
+                  <span className="font-bold text-xl cursor-default">{user.name}</span>
                 </div>
                 <button
                   onClick={signOut}
-                  className="text-white bg-red-500 rounded-xl px-2 mt-1"
+                  className="hover:scale-110 text-red-500 hover:text-accent rounded-xl px-2 mt-1 border-2 border-accent hover:border-red-500 transition duration-500 cursor-pointer"
                 >
                   Sign Out
                 </button>
