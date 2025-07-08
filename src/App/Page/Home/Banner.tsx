@@ -26,17 +26,13 @@ const Banner: React.FC<BannerProps> = ({ receivedData }) => {
         <h1 className="text-3xl sm:text-5xl font-extrabold mb-4">
           {receivedData?.title}
         </h1>
-        <p className="text-base sm:text-lg lg:text-xl mb-6 max-w-3xl">
+        <p className="text-base sm:text-lg lg:text-xl mb-6 max-w-5xl">
           {receivedData?.overview?.slice(0, 250)}...
         </p>
-        <button
-          className="bg-white text-black py-2 px-6 text-sm rounded-lg hover:bg-opacity-70 hover:scale-110 transition duration-500 cursor-pointer
-                  sm:py-3 sm:px-8 sm:text-base sm:max-w-sm
-                  md:py-3 md:px-10 md:max-w-md
-                  lg:py-4 lg:px-12 lg:text-lg lg:max-w-lg"
-        >
+        <button className="bg-accent text-black max-w-sm py-3 px-4 text-lg rounded-lg hover:scale-110 transition duration-500 cursor-pointer">
           <div className="flex items-center justify-center">
-            <i className="bx bx-play lg:text-5xl md:text-3xl sm:text-xl"></i> Play / More Info
+            <i className="bx bx-play text-3xl lg:text-5xl"></i>{" "}
+            Play / More Info
           </div>
         </button>
       </div>
