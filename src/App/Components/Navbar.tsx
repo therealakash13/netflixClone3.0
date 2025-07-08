@@ -84,10 +84,7 @@ export default function Navbar() {
               <ul className="flex items-center justify-center space-x-6">
                 {links.map((link) => (
                   <li key={link.name}>
-                    <Link
-                      to={link.path}
-                      className=""
-                    >
+                    <Link to={link.path} className="">
                       <div className="flex flex-col items-center justify-center hover:scale-110 hover:text-accent transition duration-500">
                         <i className={link.icon}></i>
                         {link.name}
@@ -118,7 +115,7 @@ export default function Navbar() {
                 className="px-3 py-1 rounded-xl border-2 focus:border-accent shadow-sm focus:outline-none w-60 hidden xl:flex"
               />
               {isDropdownVisible && (
-                <ul className="absolute top-full mt-1 w-80 rounded-xl z-10 max-h-96 overflow-y-auto bg-accent text-white transition-colors duration-500">
+                <ul className="absolute top-full mt-1 w-80 rounded-xl z-10 max-h-96 overflow-y-auto text-white bg-accent transition duration-500">
                   {searchResults.map((item, i) => (
                     <li
                       key={i}
@@ -166,7 +163,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="focus:outline-none"
               >
-                <i className='bx bx-menu text-2xl hover:text-accent hover:scale-110 transition duration-500 cursor-pointer'></i>
+                <i className="bx bx-menu text-2xl hover:text-accent hover:scale-110 transition duration-500 cursor-pointer"></i>
               </button>
             </div>
           </div>
@@ -193,7 +190,9 @@ export default function Navbar() {
                     className="w-10 h-10 rounded-full"
                     referrerPolicy="no-referrer"
                   />
-                  <span className="font-bold text-xl cursor-default">{user.name}</span>
+                  <span className="font-bold text-xl cursor-default">
+                    {user.name}
+                  </span>
                 </div>
                 <button
                   onClick={signOut}
