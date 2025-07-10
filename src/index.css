@@ -15,9 +15,13 @@
 }
 
 @theme {
-  --color-primary: #1c1c1e;
-  --color-secondary: #2c2c2e;
-  --color-accent: #f47521;
-  --color-text-muted: #b0b0b0;
-  --color-border-default: #3a3a3c;
+  /* primary colors */
+  --color-background: #F5F7FA;
+  --color-primary: #2C3E50;
+  --color-content: #FFFFFF;
+  --color-btn: #3FB8AF;
+  --color-secondary: #ff6b6b;
+  --color-info: #A8DADC;
+  --color-footer: #4B4B4B;
+  --color-bordercolor: #D3D3D3;
 }
