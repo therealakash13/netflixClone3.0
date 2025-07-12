@@ -1,5 +1,7 @@
 import axios from "axios";
 import type { Movie } from "./movies.type";
+import type { Tv } from "./tv.type";
+import { data } from "react-router-dom";
 
 // const options = {
 //   params: {
@@ -18,7 +20,7 @@ import type { Movie } from "./movies.type";
 //   },
 // };
 
-const page : number = 1;
+const page: number = 1;
 
 const options = {
   params: {
@@ -48,16 +50,30 @@ export const fetchBannerMovie = async (): Promise<Movie[]> => {
   }
 };
 
-export const fetchMovies = async (page:number): Promise<Movie[]> => {
+export const fetchMovies = async (page: number): Promise<Movie[]> => {
   try {
     const response = await axios.get(
-       `https://api.themoviedb.org/3/movie/popular?page=${page}`,
+      `https://api.themoviedb.org/3/movie/popular?page=${page}`,
       options
     );
 
     return response.data.results;
   } catch (error) {
     console.error("Error:", error);
+    return [];
+  }
+};
+
+export const fetchTvShows = async (page: number): Promise<Tv[]> => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/discover/tv?page=${page}`,
+      options
+    );
+
+    return response.data.results;
+  } catch (error) {
+    console.error("Error", error);
     return [];
   }
 };

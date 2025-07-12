@@ -17,7 +17,7 @@ interface Props {
 
 const MediaGrid: React.FC<Props> = ({ movies, tv }) => {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4 over">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
       {/* Movies Section */}
       {movies?.map((movie) => (
         <div
@@ -28,12 +28,12 @@ const MediaGrid: React.FC<Props> = ({ movies, tv }) => {
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.original_title || "Movie poster"}
-              className="object-cover w-full h-full transition-opacity duration-300 group-hover:opacity-90"
+              className="object-cover w-full h-full transition-opacity duration-300 group-hover:opacity-90 cursor-pointer"
               loading="lazy" // Better performance
             />
           </div>
           <div className="w-full mt-2 text-center">
-            <span className="inline-block px-2 py-1 text-sm font-medium text-white bg-gray-800 rounded-md md:text-base line-clamp-1">
+            <span className="inline-block px-2 py-1 text-sm font-medium text-text bg-accent rounded-md md:text-base line-clamp-1 cursor-pointer">
               {movie.title}
             </span>
           </div>
@@ -55,7 +55,7 @@ const MediaGrid: React.FC<Props> = ({ movies, tv }) => {
             />
           </div>
           <div className="w-full mt-2 text-center">
-            <span className="inline-block px-2 py-1 text-sm font-medium text-white bg-gray-800 rounded-md md:text-base line-clamp-1">
+            <span className="inline-block px-2 py-1 text-sm font-medium text-text bg-accent rounded-md md:text-base line-clamp-1">
               {show.name}
             </span>
           </div>
