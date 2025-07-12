@@ -26,7 +26,7 @@ export default function MoviesPage() {
           </div>
 
           {/* Pagination Controls - Fixed at bottom */}
-          <div className="h-12 flex flex-row justify-between items-center mt-3 px-3 sticky bottom-0 bg-background backdrop-blur-sm py-2 z-10">
+          <div className="h-12 flex flex-row justify-between items-center mt-3 px-3 sticky bottom-0 bg-background/90 backdrop-blur-sm py-2 z-10">
             <button
               onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
               disabled={page === 1}

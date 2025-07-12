@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { fetchTvShows } from "../../Services/MovieFetch";
+import type { Movie } from "../../Services/movies.type";
+import { fetchNowPlaying } from "../../Services/MovieFetch";
 import MediaGrid from "../../Components/MediaGrid";
-import type { Tv } from "../../Services/tv.type";
 
-export default function TvPage() {
+export default function NowPlayingPage() {
   const [page, setPage] = useState(1);
-  const [tv, setTv] = useState<Tv[]>([]);
+  const [movie, setMovie] = useState<Movie[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      setTv(await fetchTvShows(page));
+      setMovie(await fetchNowPlaying(page));
     };
     fetchData();
   }, [page]);
@@ -21,7 +21,7 @@ export default function TvPage() {
           {/* Grid Scroll Container */}
           <div className="flex-1 w-full overflow-y-auto overflow-x-hidden">
             <div className="mx-auto max-w-screen-2xl">
-              <MediaGrid tv={tv} />
+              <MediaGrid movies={movie} />
             </div>
           </div>
 
