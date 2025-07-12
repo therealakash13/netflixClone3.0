@@ -16,12 +16,8 @@
 
 @theme {
   /* primary colors */
-  --color-background: #F5F7FA;
-  --color-primary: #2C3E50;
-  --color-content: #FFFFFF;
-  --color-btn: #3FB8AF;
-  --color-secondary: #ff6b6b;
-  --color-info: #A8DADC;
-  --color-footer: #4B4B4B;
-  --color-bordercolor: #D3D3D3;
+  --color-background: #1b3c53;
+  --color-text: #f9f3ef;
+  --color-accent: #456882; /* for buttons and hover effects */
+  --color-highlight: #d2c1b6; /* for borders and icons */
 }

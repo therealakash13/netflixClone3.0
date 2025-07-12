@@ -19,17 +19,17 @@ const Banner: React.FC<BannerProps> = ({ receivedData }) => {
       />
 
       {/* Optional gradient overlay for readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent z-10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
 
       {/* Movie content */}
       <div className="absolute inset-0 z-20 flex flex-col justify-end px-6 sm:px-12 lg:px-24 pb-20">
-        <h1 className="text-3xl sm:text-5xl font-extrabold mb-4 text-background text-shadow-2xs">
+        <h1 className="text-3xl sm:text-5xl font-extrabold mb-4 text-text text-shadow-2xs">
           {receivedData?.title}
         </h1>
-        <p className="text-base sm:text-lg lg:text-xl mb-6 max-w-5xl text-info text-shadow-2xs">
+        <p className="text-base sm:text-lg lg:text-xl mb-6 max-w-5xl text-text text-shadow-2xs">
           {receivedData?.overview?.slice(0, 250)}...
         </p>
-        <button className="bg-accent text-primary bg-btn max-w-sm py-3 px-4 text-lg rounded-lg hover:scale-110 transition duration-500 cursor-pointer">
+        <button className="bg-accent text-text bg-btn max-w-sm py-3 px-4 text-lg rounded-lg hover:scale-110 transition duration-500 cursor-pointer">
           <div className="flex items-center justify-center">
             <i className="bx bx-play text-3xl lg:text-5xl"></i>{" "}
             Play / More Info
