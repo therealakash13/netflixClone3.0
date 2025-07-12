@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchPopularMovies } from "../../Services/MovieFetch";
+import { fetchBannerMovie } from "../../Services/MovieFetch";
 import type { Movie } from "../../Services/movies.type";
 import Banner from "./Banner";
 
@@ -8,7 +8,7 @@ export default function HomePage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setMovie(await fetchPopularMovies());
+      setMovie(await fetchBannerMovie());
     };
     fetchData();
   }, []);

@@ -18,12 +18,13 @@ import type { Movie } from "./movies.type";
 //   },
 // };
 
+const page : number = 1;
+
 const options = {
   params: {
     include_adult: false,
     include_video: false,
     language: "en-US",
-    page: 1,
     sort_by: "popularity.desc",
   },
   headers: {
@@ -33,12 +34,24 @@ const options = {
   },
 };
 
-export const fetchPopularMovies = async (): Promise<Movie[]> => {
+export const fetchBannerMovie = async (): Promise<Movie[]> => {
   try {
-    console.log("Hello from MovieFetch");
-
     const response = await axios.get(
-      "https://api.themoviedb.org/3/discover/movie",
+      `https://api.themoviedb.org/3/discover/movie?page=${page}`,
+      options
+    );
+
+    return response.data.results;
+  } catch (error) {
+    console.error("Error:", error);
+    return [];
+  }
+};
+
+export const fetchMovies = async (page:number): Promise<Movie[]> => {
+  try {
+    const response = await axios.get(
+       `https://api.themoviedb.org/3/movie/popular?page=${page}`,
       options
     );
 
