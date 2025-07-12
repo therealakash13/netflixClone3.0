@@ -101,3 +101,17 @@ export const fetchUpcoming = async (page: number): Promise<Movie[]> => {
     return [];
   }
 };
+
+export const search = async (id: string): Promise<Partial<Movie[]>> => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/search/multi?query=${id}`,
+      options
+    );
+
+    return response.data.results;
+  } catch (error) {
+    console.error("Error:", error);
+    return [];
+  }
+};

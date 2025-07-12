@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import type { decodedResponse } from "../Page/Login/LoginTypes";
-
-interface SearchItem {
-  name?: string;
-  title?: string;
-  poster_path: string;
-}
+import { search } from "../Services/MovieFetch";
+import type { Movie } from "../Services/movies.type";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -21,26 +17,29 @@ export default function Navbar() {
   ];
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState<SearchItem[]>([]);
+  const [searchResults, setSearchResults] = useState<Movie[]>([]);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [user, setUser] = useState<Partial<decodedResponse>>({});
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const onSearchChange = () => {
-    // Simulate search logic
+  const onSearchChange = async () => {
     if (searchTerm.length > 1) {
       setIsDropdownVisible(true);
-      // Simulate dummy results
-      setSearchResults([
-        { title: "Example Movie", poster_path: "/example.jpg" },
-        { name: "TV Show", poster_path: "/tvshow.jpg" },
-      ]);
+
+      try {
+        const results = await search(searchTerm);
+        setSearchResults(results.filter((m): m is Movie => m !== undefined)); // Type-safe filter
+      } catch (error) {
+        console.error("Search error:", error);
+        setSearchResults([]);
+      }
     } else {
       setIsDropdownVisible(false);
+      setSearchResults([]); // Clear results if input is too short
     }
   };
 
-  const selectResult = (item: SearchItem) => {
+  const selectResult = (item: Movie) => {
     console.log("Selected:", item);
     setIsDropdownVisible(false);
     setSearchTerm("");
@@ -115,7 +114,7 @@ export default function Navbar() {
                 className="px-3 py-1 rounded-xl border-2 border-highlight focus:border-accent shadow-sm focus:outline-none w-60 hidden xl:flex placeholder-text"
               />
               {isDropdownVisible && (
-                <ul className="absolute top-full mt-1 w-80 rounded-xl z-10 max-h-96 overflow-y-auto text-text bg-background transition duration-500">
+                <ul className="absolute top-full mt-1 w-80 rounded-xl z-10 max-h-96 overflow-y-auto text-text bg-accent transition duration-500 scrollbar-thin scrollbar-thumb-accent scrollbar-track-background">
                   {searchResults.map((item, i) => (
                     <li
                       key={i}
@@ -128,7 +127,9 @@ export default function Navbar() {
                           src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                           alt=""
                         />
-                        <span>{item.name || item.title}</span>
+                        <span>
+                          {item.title || item.original_title || item.name}
+                        </span>
                       </div>
                     </li>
                   ))}
