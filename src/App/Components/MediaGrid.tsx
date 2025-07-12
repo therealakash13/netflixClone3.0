@@ -22,7 +22,7 @@ const MediaGrid: React.FC<Props> = ({ movies, tv }) => {
       {movies?.map((movie) => (
         <div
           key={`movie-${movie.id}`} // Better to use movie.id if available
-          className="group flex flex-col items-center transition-transform duration-300 hover:scale-105"
+          className="group flex flex-col items-center transition-transform duration-300 hover:scale-105 animate-fadeInUp"
         >
           <div className="relative w-full overflow-hidden rounded-xl aspect-[2/3] shadow-lg">
             <img
