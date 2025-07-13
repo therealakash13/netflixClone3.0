@@ -1,13 +1,14 @@
 import axios from "axios";
 import type { Movie } from "./movies.type";
 import type { Tv } from "./tv.type";
+import type { Video } from "./videoTypes";
 
 const page: number = 1;
 
 const options = {
   params: {
     include_adult: false,
-    include_video: false,
+    include_video: true,
     language: "en-US",
     sort_by: "popularity.desc",
   },
@@ -106,6 +107,23 @@ export const search = async (id: string): Promise<Partial<Movie[]>> => {
   try {
     const response = await axios.get(
       `https://api.themoviedb.org/3/search/multi?query=${id}`,
+      options
+    );
+
+    return response.data.results;
+  } catch (error) {
+    console.error("Error:", error);
+    return [];
+  }
+};
+
+export const fetchVideo = async (
+  id: string,
+  type: "movie" | "tv"
+): Promise<Video[]> => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/${type}/${id}/videos`,
       options
     );
 

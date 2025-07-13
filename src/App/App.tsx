@@ -10,6 +10,7 @@ import NowPlayingPage from "./Page/NowPlaying/nowPlaying";
 import PopularMoviesPage from "./Page/Popular/popularMovies";
 import UpcomingPage from "./Page/Upcoming/upcoming";
 import AboutPage from "./Page/About/about";
+import Details from "./Page/Details/details";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/popular" element={<PopularMoviesPage />} />
           <Route path="/upcoming" element={<UpcomingPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/details/:type/:id" element={<Details />} />
           {/* other nested routes */}
         </Route>
       </Routes>
