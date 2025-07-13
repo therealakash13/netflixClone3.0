@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 interface MediaItem {
   id: number;
@@ -19,10 +20,14 @@ const MediaGrid: React.FC<Props> = ({ movies, tv }) => {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
       {/* Movies Section */}
-      {movies?.map((movie) => (
-        <div
+      {movies?.map((movie,index) => (
+        <motion.div
           key={`movie-${movie.id}`} // Better to use movie.id if available
-          className="group flex flex-col items-center transition-transform duration-300 hover:scale-105 animate-fadeInUp"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="group flex flex-col items-center hover:scale-105 transition-transform duration-500"
         >
           <div className="relative w-full overflow-hidden rounded-xl aspect-[2/3] shadow-lg">
             <img
@@ -37,14 +42,18 @@ const MediaGrid: React.FC<Props> = ({ movies, tv }) => {
               {movie.title}
             </span>
           </div>
-        </div>
+        </motion.div>
       ))}
 
       {/* TV Shows Section */}
-      {tv?.map((show) => (
-        <div
+      {tv?.map((show,index) => (
+        <motion.div
           key={`tv-${show.id}`}
-          className="group flex flex-col items-center transition-transform duration-300 hover:scale-105"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="group flex flex-col items-center hover:scale-105 transition-transform duration-500"
         >
           <div className="relative w-full overflow-hidden rounded-xl aspect-[2/3] shadow-lg">
             <img
@@ -59,7 +68,7 @@ const MediaGrid: React.FC<Props> = ({ movies, tv }) => {
               {show.name}
             </span>
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
