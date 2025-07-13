@@ -20,7 +20,7 @@ const MediaGrid: React.FC<Props> = ({ movies, tv }) => {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
       {/* Movies Section */}
-      {movies?.map((movie,index) => (
+      {movies?.map((movie, index) => (
         <motion.div
           key={`movie-${movie.id}`} // Better to use movie.id if available
           initial={{ opacity: 0, y: 20 }}
@@ -46,7 +46,7 @@ const MediaGrid: React.FC<Props> = ({ movies, tv }) => {
       ))}
 
       {/* TV Shows Section */}
-      {tv?.map((show,index) => (
+      {tv?.map((show, index) => (
         <motion.div
           key={`tv-${show.id}`}
           initial={{ opacity: 0, y: 20 }}
